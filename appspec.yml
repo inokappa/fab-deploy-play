@@ -11,8 +11,8 @@ hooks:
   AfterInstall:
     - location: scripts/install.sh
       timeout: 300
-      runas: root
+      runas: play-app
   ApplicationStart:
     - location: scripts/start.sh
       timeout: 300
-      runas: root
+      runas: play-app
