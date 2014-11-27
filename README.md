@@ -47,7 +47,16 @@ Play Framework(Play2) で作成されたアプリケーションを play dist �
 | env.app_repo | "https://github.com/your_account/APP_NAME.git" | 展開するアプリケーションの github 上のリポジトリ名 |
 | env.snap_shot | "%(app)s-1.0-SNAPSHOT.zip" % { 'app':env.app } | play dist で生成されるファイル名 |
 | env.base_dir | "/path/to/app" | アプリケーションを展開するディレクトリ |
-|env.deploy_dir | "/path/to/deploy" | play dist を実行する為にソースコードを展開するディレクトリ |
+| env.deploy_dir | "/path/to/deploy" | play dist を実行する為にソースコードを展開するディレクトリ |
+
+デプロイ先を定義する為に以下も合わせて指定します。
+
+| パラメータ | 値 | 説明 |
+|:---|:---|:---|
+| your_environment | 任意 | fab コマンド実行時に環境を指定する為のサブコマンドとして利用します |
+| tag | Name | EC2 のネームタグ |
+| value | Value | ネームタグに指定した値を指定 |
+| region | ap-northeast-1 etc... | デプロイ対象が存在するリージョン |
 
 対象となるホストにて supervisord の設定を行って下さい。以下は設定例です。
 
