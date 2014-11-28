@@ -6,7 +6,8 @@ from boto.ec2 import EC2Connection, get_region, connect_to_region
 def default_path():
   env.app = "APP_NAME"
   env.app_repo = "https://github.com/your_account/APP_NAME.git"
-  env.snap_shot = "%(app)s-1.0-SNAPSHOT.zip" % { 'app':env.app }
+  env.snap_shot = "%(app)s-1.0-SNAPSHOT" % { 'app':env.app }
+  env.snap_shot_zip = "%(snap_shot)s.zip" % { 'snap_shot':env.snap_shot }
   env.base_dir = "/path/to/app"
   env.deploy_dir = "/path/to/deploy"
   env.current_path = "%(base_dir)s/current" % { 'base_dir':env.base_dir }
@@ -64,12 +65,11 @@ def dist_package():
 
 def deploy():
   execute(set_path)
-  execute(dist_package)
   from time import time
   env.current_release = '%(releases_path)s/%(time).0f' % { 'releases_path':env.releases_path, 'time':time() }
   with lcd('%(deploy_dir)s/%(app)s/target/universal/' % { 'deploy_dir':env.deploy_dir, 'app':env.app, 'base_dir':env.base_dir }):
     local('ls %(snap_shot)s' % { 'snap_shot':env.snap_shot })
-    put( env.snap_shot, '%(base_dir)s/' % { 'base_dir':env.base_dir })
+    put( env.snap_shot_zip, '%(base_dir)s/' % { 'base_dir':env.base_dir })
   with cd ('%(base_dir)s/' % { 'base_dir':env.base_dir }):
     run('unzip %(snap_shot)s -d %(current_release)s/' % { 'current_release':env.current_release, 'snap_shot':env.snap_shot })
   run('ln -nfs %(current_release)s %(current_path)s' % { 'current_release':env.current_release , 'current_path':env.current_path })

@@ -80,7 +80,7 @@ fab -f deploy.py ${your_environment} ${サブコマンド}
 `dist_setup` は `play dist` を実行する為のディレクトリを作成します。
 
 ~~~
-fab -f deploy.py ${your_environment} dist_setup
+fab -f deploy.py dist_setup
 ~~~
 
 `remote_setup` はアプリケーションを展開する為のディレクトリを作成します。
@@ -92,7 +92,7 @@ fab -f deploy.py ${your_environment} remote_setup
 `dist_package` はアプリケーションを `git clone` して `play dist` を実行します。
 
 ~~~
-fab -f deploy.py ${your_environment} dist_package
+fab -f deploy.py dist_package
 ~~~
 
 `deploy` はパッケージングされたアプリケーションをアプリケーション・サーバーに転送して展開してアプリケーションの起動準備をします。
